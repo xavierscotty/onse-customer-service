@@ -5,8 +5,7 @@ from customer_service import create_app
 
 @pytest.fixture
 def app():
-    return create_app({'HOSTNAME': 'example-host-name',
-                       'TESTING': True})
+    return create_app()
 
 
 @pytest.fixture

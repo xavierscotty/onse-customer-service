@@ -3,13 +3,8 @@ import os
 from flask import Flask, jsonify
 
 
-def create_app(config=None):
+def create_app():
     app = Flask(__name__, instance_relative_config=True)
-
-    if config is None:
-        app.config.from_object(os.environ['APP_SETTINGS'])
-    else:
-        app.config.from_mapping(config)
 
     @app.route('/health', methods=['GET'])
     def get_health():
