@@ -10,6 +10,8 @@ behave = "*"
 
 [packages]
 flask = "*"
+flask-swagger-ui = "*"
+pyaml = "*"
 
 [requires]
 python_version = "3.7"

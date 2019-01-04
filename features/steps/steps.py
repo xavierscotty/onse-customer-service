@@ -6,6 +6,6 @@ def step_impl(context, id):
 
 @then(u'I should see customer "{expected_name}"')
 def step_impl(context, expected_name):
-    full_name = context.response['first_name'] + " " + context.response['surname']
+    full_name = context.response['firstName'] + " " + context.response['surname']
     assert full_name == expected_name
  

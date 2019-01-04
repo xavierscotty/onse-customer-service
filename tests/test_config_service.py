@@ -10,8 +10,8 @@ def test_get_customers(web_client):
     response = web_client.get('/customers/12345')
     assert response.is_json
     assert response.get_json() == {
-        'id': '12345',
-        'first_name': 'Joe',
+        'customerId': '12345',
+        'firstName': 'Joe',
         'surname': 'Bloggs'
     }
 

@@ -23,6 +23,7 @@ paths:
           required: true
           description: Customer identification number
           type: string
+          x-example: '12345'
       responses:
         200:
           description: Customer details found
