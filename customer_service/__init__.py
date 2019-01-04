@@ -16,8 +16,8 @@ def create_app():
         if customer_id == 12345:
             return jsonify({
                 'id': str(customer_id),
-                'name': 'Joe',
-                'surname': 'Blogg'
+                'first_name': 'Joe',
+                'surname': 'Bloggs'
             })
         else:
             return jsonify({

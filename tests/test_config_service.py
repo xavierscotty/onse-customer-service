@@ -11,8 +11,8 @@ def test_get_customers(web_client):
     assert response.is_json
     assert response.get_json() == {
         'id': '12345',
-        'name': 'Joe',
-        'surname': 'Blogg'
+        'first_name': 'Joe',
+        'surname': 'Bloggs'
     }
 
 def test_get_customers_not_found(web_client):
