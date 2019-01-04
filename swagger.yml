@@ -1,0 +1,47 @@
+---
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Customer Service API
+  description: An API to get the customer details
+
+host: "localhost:5000"
+schemes:
+  - http
+
+paths:
+  /customers/{customerId}:
+    get:
+      summary: Get customer by customerId
+      description: Returns the customer details
+      produces:
+        - application/json
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: Customer identification number
+          type: string
+      responses:
+        200:
+          description: Customer details found
+          schema:
+              $ref: "#/definitions/Customer"
+        404:
+          description: Customer details not found
+          
+definitions:
+ Customer:
+   type: "object"
+   properties:
+     id:
+       type: "string"
+       description: "Customer Id"
+     firstName:
+       type: "string"
+       description: "Customer First Name"
+     surname:
+       type: "string"
+       description: "Customer Surname"
+        
