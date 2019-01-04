@@ -10,5 +10,5 @@ def app():
 
 
 @pytest.fixture
-def client(app):
+def web_client(app):
     return app.test_client()

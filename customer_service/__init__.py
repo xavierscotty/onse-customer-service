@@ -1,6 +1,8 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
+
+import json
 
 
 def create_app(config=None):
@@ -14,5 +16,19 @@ def create_app(config=None):
     @app.route('/health')
     def hello_world():
         return jsonify({"message": "OK"})
+
+    @app.route('/customers/<int:customer_id>', methods=['GET'])
+    def get_customers(customer_id):
+
+        if customer_id == 12345:
+            return jsonify({
+                'id': str(customer_id),
+                'name': 'Joe',
+                'surname': 'Blogg'
+            })
+        else:
+            return jsonify({
+                'message': 'Not found'
+            }), 404
 
     return app
