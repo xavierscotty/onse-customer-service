@@ -1,8 +1,6 @@
 import os
 
-from flask import Flask, jsonify, Response
-
-import json
+from flask import Flask, jsonify
 
 
 def create_app(config=None):
@@ -13,8 +11,8 @@ def create_app(config=None):
     else:
         app.config.from_mapping(config)
 
-    @app.route('/health')
-    def hello_world():
+    @app.route('/health', methods=['GET'])
+    def get_health():
         return jsonify({"message": "OK"})
 
     @app.route('/customers/<int:customer_id>', methods=['GET'])
