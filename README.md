@@ -11,7 +11,7 @@ pipenv install --dev
 
 ### To run tests
 
-``` 
+```
 pipenv run python -m pytest
 ```
 
@@ -19,4 +19,11 @@ pipenv run python -m pytest
 
 ```
 FLASK_APP=customer_service pipenv run flask run
+```
+
+### Commands
+
+```
+docker build -t customer-service .
+docker run -p 8080:8080 -it customer-service
 ```
