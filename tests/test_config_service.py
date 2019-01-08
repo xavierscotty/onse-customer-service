@@ -15,6 +15,7 @@ def test_get_customers(web_client):
         'surname': 'Bloggs'
     }
 
+
 def test_get_customers_not_found(web_client):
     response = web_client.get('/customers/000000')
     assert response.is_json

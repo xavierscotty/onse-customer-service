@@ -6,6 +6,7 @@ from yaml import Loader, load
 
 SWAGGER_URL = '/docs'
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -13,12 +14,12 @@ def create_app():
     def get_health():
         return jsonify({"message": "OK"})
 
-    @app.route('/customers/<string:customerId>', methods=['GET'])
-    def get_customers(customerId):
+    @app.route('/customers/<customer_id>', methods=['GET'])
+    def get_customers(customer_id):
 
-        if customerId == '12345':
+        if customer_id == '12345':
             return jsonify({
-                'customerId': customerId,
+                'customerId': customer_id,
                 'firstName': 'Joe',
                 'surname': 'Bloggs'
             })
@@ -26,18 +27,19 @@ def create_app():
             return jsonify({
                 'message': 'Not found'
             }), 404
-        
-    
+
     app.register_blueprint(setup_swagger(), url_prefix=SWAGGER_URL)
 
     return app
 
-def setup_swagger():
 
-    swagger_yml = load(open(get_app_base_path() + '/../swagger.yml', 'r'), Loader=Loader)
+def setup_swagger():
+    swagger_yml = load(open(get_app_base_path() + '/../swagger.yml', 'r'),
+                       Loader=Loader)
 
     swaggerui_blueprint = get_swaggerui_blueprint(
-        SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+        SWAGGER_URL,
+        # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
         '',
         config={  # Swagger UI config overrides
             'app_name': "Customer Service API",
@@ -47,7 +49,6 @@ def setup_swagger():
 
     return swaggerui_blueprint
 
+
 def get_app_base_path():
-   return os.path.dirname(os.path.realpath(__file__))
-
-
+    return os.path.dirname(os.path.realpath(__file__))
