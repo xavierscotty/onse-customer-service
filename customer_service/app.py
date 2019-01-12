@@ -5,8 +5,10 @@ from customer_service.controllers.customers import customers
 from customer_service.controllers.health import health
 
 
-def create():
+def create(customer_repository):
     app = Flask(__name__)
+
+    app.customer_repository = customer_repository
 
     app.register_blueprint(health)
     app.register_blueprint(customers)

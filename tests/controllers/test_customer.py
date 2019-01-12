@@ -13,14 +13,16 @@ def test_get_health(web_client):
 
 
 @patch('customer_service.model.commands.get_customer')
-def test_get_customers(get_customer, web_client):
-    get_customer.return_value = Customer(id=12345,
+def test_get_customers(get_customer, web_client, customer_repository):
+    get_customer.return_value = Customer(customer_id=12345,
                                          first_name='Joe',
                                          surname='Bloggs')
 
     response = web_client.get('/customers/12345')
 
-    get_customer.assert_called_with(12345)
+    get_customer.assert_called_with(
+        customer_id=12345,
+        customer_repository=customer_repository)
     assert response.is_json
     assert response.get_json() == {
         'customerId': '12345',

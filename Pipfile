@@ -15,4 +15,4 @@ flask-swagger-ui = "*"
 pyaml = "*"
 
 [requires]
-python_version = "3.7Øe"
+python_version = "3.7.2"
