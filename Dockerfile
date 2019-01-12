@@ -4,9 +4,9 @@ ADD . /app
 
 WORKDIR /app
 
-RUN pip install pipenv  && pipenv install --system
-
 RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+
+RUN pip install pipenv  && pipenv install --system
 
 ENV PORT=5000
 
