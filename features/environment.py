@@ -1,5 +1,5 @@
-from customer_service import create_app
+from customer_service.app import create
 
 
 def before_all(context):
-    context.web_client = create_app().test_client()
+    context.web_client = create().test_client()

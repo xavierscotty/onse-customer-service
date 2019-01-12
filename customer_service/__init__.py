@@ -1,36 +1,9 @@
 import os
 
-from flask import Flask, jsonify
 from flask_swagger_ui import get_swaggerui_blueprint
 from yaml import Loader, load
 
 SWAGGER_URL = '/docs'
-
-
-def create_app():
-    app = Flask(__name__)
-
-    @app.route('/health', methods=['GET'])
-    def get_health():
-        return jsonify({"message": "OK"})
-
-    @app.route('/customers/<customer_id>', methods=['GET'])
-    def get_customers(customer_id):
-
-        if customer_id == '12345':
-            return jsonify({
-                'customerId': customer_id,
-                'firstName': 'Joe',
-                'surname': 'Bloggs'
-            })
-        else:
-            return jsonify({
-                'message': 'Not found'
-            }), 404
-
-    app.register_blueprint(setup_swagger(), url_prefix=SWAGGER_URL)
-
-    return app
 
 
 def setup_swagger():
