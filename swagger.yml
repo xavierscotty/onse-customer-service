@@ -6,7 +6,7 @@ info:
   title: Customer Service API
   description: An API to get the customer details
 
-host: "localhost:5000"
+host: localhost:5000
 schemes:
   - http
 
@@ -23,26 +23,33 @@ paths:
           required: true
           description: Customer identification number
           type: string
-          x-example: '12345'
+          x-example: "12345"
       responses:
         200:
           description: Customer details found
           schema:
-              $ref: "#/definitions/Customer"
+            $ref: "#/definitions/Customer"
         404:
           description: Customer details not found
-          
+          schema:
+            $ref: "#/definitions/Message"
+
 definitions:
- Customer:
-   type: "object"
-   properties:
-     id:
-       type: "string"
-       description: "Customer Id"
-     firstName:
-       type: "string"
-       description: "Customer First Name"
-     surname:
-       type: "string"
-       description: "Customer Surname"
-        
+  Customer:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Customer Id
+      firstName:
+        type: string
+        description: Customer First Name
+      surname:
+        type: string
+        description: Customer Surname
+  Message:
+    type: object
+    properties:
+      message:
+        type: string
+        description: The message
