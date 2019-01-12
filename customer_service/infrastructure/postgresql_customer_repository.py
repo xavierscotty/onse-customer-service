@@ -19,11 +19,11 @@ class PostgreSQLCustomerRepository:
         self.session.add(customer)
         self.session.commit()
 
-    def customer_id(self, customer_id):
+    def fetch_by_id(self, customer_id):
         try:
             return self.session \
                 .query(Customer) \
-                .filter(Customer.account_number == customer_id) \
+                .filter(Customer.customer_id == customer_id) \
                 .one()
         except NoResultFound:
             raise CustomerNotFound()
