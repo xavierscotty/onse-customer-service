@@ -1,5 +1,12 @@
-class Customer:
-    def __init__(self, customer_id=None, first_name=None, surname=None):
-        self.customer_id = customer_id
-        self.first_name = first_name
-        self.surname = surname
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+
+class Customer(Base):
+    __tablename__ = 'transactions'
+
+    customer_id = Column(Integer, primary_key=True, autoincrement=True)
+    first_name = Column(String(200))
+    surname = Column(String(200))
