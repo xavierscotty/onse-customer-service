@@ -1,5 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-pipenv shell;
-python -m pytest;
-behave;
+set -ex
+
+pipenv run flake8
+pipenv run python -m pytest
+pipenv run behave
