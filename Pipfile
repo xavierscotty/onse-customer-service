@@ -13,6 +13,8 @@ flake8 = "*"
 flask = "*"
 flask-swagger-ui = "*"
 pyaml = "*"
+alembic = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.7.2"
