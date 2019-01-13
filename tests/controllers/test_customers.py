@@ -19,11 +19,9 @@ def test_get_customer_id(get_customer, web_client, customer_repository):
         customer_id=12345,
         customer_repository=customer_repository)
     assert response.is_json
-    assert response.get_json() == {
-        'customerId': '12345',
-        'firstName': 'Joe',
-        'surname': 'Bloggs'
-    }
+    assert response.get_json() == dict(customerId='12345',
+                                       firstName='Joe',
+                                       surname='Bloggs')
 
 
 @patch('customer_service.model.commands.get_customer')
@@ -34,14 +32,12 @@ def test_get_customer_not_found(get_customer, web_client):
 
     assert response.is_json
     assert response.status_code == 404
-    assert response.get_json() == {
-        'message': 'Customer not found'
-    }
+    assert response.get_json() == dict(message='Customer not found')
 
 
 @patch('customer_service.model.commands.create_customer')
 def test_create_customer(create_customer, web_client, customer_repository):
-    request_body = {'firstName': 'Jez', 'surname': 'Humble'}
+    request_body = dict(firstName='Jez', surname='Humble')
 
     response = web_client.post('/customers/', json=request_body)
 
@@ -60,17 +56,17 @@ def test_create_customer(create_customer, web_client, customer_repository):
 
     account = response.get_json()
 
-    assert account == {'firstName': 'Jez',
-                       'surname': 'Humble',
-                       'customerId': None}  # ID isNone because call is mocked
+    assert account == dict(firstName='Jez',
+                           surname='Humble',
+                           customerId='None')  # ID isNone because call is mocked
 
 
 @pytest.mark.parametrize(
     'bad_payload',
-    [{},
-     {'firstName': 'Joe', 'surname': 'Bloggs', 'unknown': 'value'},
-     {'firstName': '', 'surname': 'Bloggs'},
-     {'firstName': 'Joe', 'surname': ''}])
+    [dict(),
+     dict(firstName='Joe', surname='Bloggs', unknown='value'),
+     dict(firstName='', surname='Bloggs'),
+     dict(firstName='Joe', surname='')])
 def test_create_customer_with_bad_payload(web_client, bad_payload):
     response = web_client.post('/customers/', json=bad_payload)
     assert response.status_code == 400

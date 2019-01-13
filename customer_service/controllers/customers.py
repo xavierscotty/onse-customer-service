@@ -44,7 +44,7 @@ def create_customer():
         customer=customer,
         customer_repository=customer_repository)
 
-    return jsonify(customerId=customer.customer_id,
+    return jsonify(customerId=str(customer.customer_id),
                    firstName=customer.first_name,
                    surname=customer.surname), HTTPStatus.CREATED
 
