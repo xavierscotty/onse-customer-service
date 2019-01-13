@@ -51,16 +51,12 @@ def create_customer():
 
 @customers.errorhandler(CustomerNotFound)
 def customer_not_found(e):
-    return jsonify({
-        'message': 'Customer not found'
-    }), HTTPStatus.NOT_FOUND
+    return jsonify(dict(message='Customer not found')), HTTPStatus.NOT_FOUND
 
 
 @customers.errorhandler(SchemaError)
 def invalid_schema(e):
-    return jsonify({
-        'message': str(e)
-    }), HTTPStatus.BAD_REQUEST
+    return jsonify(dict(message=str(e))), HTTPStatus.BAD_REQUEST
 
 
 class ContentTypeError(RuntimeError):
@@ -69,6 +65,5 @@ class ContentTypeError(RuntimeError):
 
 @customers.errorhandler(ContentTypeError)
 def content_type_error(e):
-    return jsonify({
-        'message': 'Request must be application/json'
-    }), HTTPStatus.UNSUPPORTED_MEDIA_TYPE
+    return jsonify(dict(message='Request must be application/json')), \
+           HTTPStatus.UNSUPPORTED_MEDIA_TYPE
