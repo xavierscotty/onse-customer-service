@@ -65,6 +65,10 @@ paths:
           description: Bad payload send
           schema:
             $ref: "#/definitions/Message"
+        415:
+          description: Bad Content-Type
+          schema:
+            $ref: "#/definitions/Message"
 
 definitions:
   Customer:
