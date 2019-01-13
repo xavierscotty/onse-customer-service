@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from flask import jsonify, Blueprint, current_app, request
 from schema import Schema, SchemaError, And
 
@@ -44,21 +46,21 @@ def create_customer():
 
     return jsonify(customerId=customer.customer_id,
                    firstName=customer.first_name,
-                   surname=customer.surname), 201
+                   surname=customer.surname), HTTPStatus.CREATED
 
 
 @customers.errorhandler(CustomerNotFound)
 def customer_not_found(e):
     return jsonify({
         'message': 'Customer not found'
-    }), 404
+    }), HTTPStatus.NOT_FOUND
 
 
 @customers.errorhandler(SchemaError)
 def invalid_schema(e):
     return jsonify({
         'message': str(e)
-    }), 400
+    }), HTTPStatus.BAD_REQUEST
 
 
 class ContentTypeError(RuntimeError):
@@ -69,4 +71,4 @@ class ContentTypeError(RuntimeError):
 def content_type_error(e):
     return jsonify({
         'message': 'Request must be application/json'
-    }), 400
+    }), HTTPStatus.UNSUPPORTED_MEDIA_TYPE
