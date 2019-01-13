@@ -1,6 +1,8 @@
 from unittest import mock
 from unittest.mock import patch
 
+import pytest
+
 from customer_service.model.customer import Customer
 from customer_service.model.errors import CustomerNotFound
 
@@ -33,7 +35,7 @@ def test_get_customer_not_found(get_customer, web_client):
     assert response.is_json
     assert response.status_code == 404
     assert response.get_json() == {
-        'message': 'Not found'
+        'message': 'Customer not found'
     }
 
 
@@ -61,3 +63,20 @@ def test_create_customer(create_customer, web_client, customer_repository):
     assert account == {'firstName': 'Jez',
                        'surname': 'Humble',
                        'customerId': None}  # ID isNone because call is mocked
+
+
+@pytest.mark.parametrize(
+    'bad_payload',
+    [{},
+     {'firstName': 'Joe', 'surname': 'Bloggs', 'unknown': 'value'},
+     {'firstName': '', 'surname': 'Bloggs'},
+     {'firstName': 'Joe', 'surname': ''}])
+def test_create_customer_with_bad_payload(web_client, bad_payload):
+    response = web_client.post('/customers/', json=bad_payload)
+    assert response.status_code == 400
+
+
+def test_create_customer_with_context_type(web_client):
+    response = web_client.post('/customers/', data='not json')
+    assert response.status_code == 400
+    assert response.get_json()['message'] == 'Request must be application/json'

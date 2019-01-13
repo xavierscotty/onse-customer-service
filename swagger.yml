@@ -33,6 +33,38 @@ paths:
           description: Customer details not found
           schema:
             $ref: "#/definitions/Message"
+  /customers/:
+    post:
+      summary: Create a new customer
+      description: Creates a new customer and returns save customer
+      produces:
+        - application/json
+      parameters:
+        - name: firstName
+          in: body
+          required: true
+          description: The customer's first name
+          type: string
+          minLength: 1
+          maxLength: 200
+          x-example: "Joe"
+        - name: surname
+          in: body
+          required: true
+          description: The customer's surname
+          type: string
+          minLength: 1
+          maxLength: 200
+          x-example: "Bloggs"
+      responses:
+        200:
+          description: Customer details found
+          schema:
+            $ref: "#/definitions/Customer"
+        400:
+          description: Bad payload send
+          schema:
+            $ref: "#/definitions/Message"
 
 definitions:
   Customer:
