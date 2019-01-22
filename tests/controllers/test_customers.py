@@ -56,9 +56,10 @@ def test_create_customer(create_customer, web_client, customer_repository):
 
     account = response.get_json()
 
-    assert account == dict(firstName='Jez',
-                           surname='Humble',
-                           customerId='None')  # ID isNone because call is mocked
+    assert account == dict(
+        firstName='Jez',
+        surname='Humble',
+        customerId='None')  # ID isNone because call is mocked
 
 
 @pytest.mark.parametrize(
