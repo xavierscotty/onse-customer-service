@@ -46,7 +46,7 @@ spec:
               path: config.json
 """
 
-podTemplate(name: 'customer-service-build', label: label, yaml: build_pod_template) {
+podTemplate(name: "${namespace}-customer-service-build", label: label, yaml: build_pod_template) {
   node(label) {
     git git_repository
 
